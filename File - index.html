@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>College Study Dashboard</title>
+
+<style>
+body{
+margin:0;
+font-family:sans-serif;
+text-align:center;
+background:linear-gradient(135deg,#ffdde1,#a1c4fd);
+transition:0.5s;
+}
+
+/* BOX */
+.box{
+background:rgba(255,255,255,0.2);
+backdrop-filter:blur(10px);
+padding:20px;
+margin:20px auto;
+border-radius:20px;
+width:360px;
+}
+
+/* BUTTON */
+button{
+padding:8px;
+margin:5px;
+border:none;
+background:#6a11cb;
+color:white;
+border-radius:8px;
+cursor:pointer;
+}
+
+/* STICKERS */
+.sticker{
+position:absolute;
+font-size:22px;
+animation:float 4s infinite;
+}
+@keyframes float{
+0%{transform:translateY(0)}
+50%{transform:translateY(-10px)}
+100%{transform:translateY(0)}
+}
+
+/* PROGRESS */
+.progress{
+width:100%;
+background:#ddd;
+border-radius:10px;
+}
+.bar{
+height:10px;
+width:0%;
+background:#6a11cb;
+border-radius:10px;
+}
+
+/* IMAGES */
+.images img{
+width:60px;
+margin:4px;
+border-radius:10px;
+}
+</style>
+</head>
+
+<body>
+
+<!-- STICKERS -->
+<div class="sticker" style="top:10%;left:5%">🌸</div>
+<div class="sticker" style="top:20%;right:5%">✨</div>
+<div class="sticker" style="bottom:10%;left:10%">🍓</div>
+<div class="sticker" style="bottom:15%;right:10%">🌈</div>
+<div class="sticker" style="top:50%;left:2%">🎀</div>
+<div class="sticker" style="top:60%;right:2%">⭐</div>
+
+<h2>🌸 College Study Dashboard</h2>
+
+<div class="box">
+
+<!-- THEME -->
+<h3>🎨 Theme</h3>
+<button onclick="theme1()">Pink</button>
+<button onclick="theme2()">Blue</button>
+
+<!-- TIMETABLE -->
+<h3>📅 Study Timetable</h3>
+<div style="text-align:left">
+🌅 6AM – Wake Up<br>
+📚 7AM – Revision<br>
+💻 10AM – Coding<br>
+🍴 2PM – Lunch<br>
+📖 4PM – Study<br>
+🧠 6PM – Practice<br>
+🎧 8PM – Relax<br>
+🌙 10PM – Sleep
+</div>
+
+<!-- EXTRA TASK -->
+<h3>⏳ Extra Tasks</h3>
+<ul>
+<li>Revise Notes</li>
+<li>Practice Coding</li>
+<li>Watch Lecture</li>
+</ul>
+
+<!-- TIMER -->
+<h3>⏱ Study Timer</h3>
+<div id="timer">25:00</div>
+<button onclick="start()">Start</button>
+<button onclick="reset()">Reset</button>
+
+<!-- PROGRESS -->
+<h3>📊 Progress</h3>
+<div class="progress"><div class="bar" id="bar"></div></div>
+<button onclick="progressAdd()">Complete</button>
+
+<!-- MUSIC -->
+<h3>🎧 Music</h3>
+<audio controls>
+<source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3">
+</audio>
+
+<!-- ALARM -->
+<h3>⏰ Alarm</h3>
+<input type="time" id="alarmTime">
+<button onclick="setAlarm()">Set Alarm</button>
+
+<!-- IMAGES -->
+<h3>💜 Aesthetic</h3>
+<div class="images">
+<img src="https://picsum.photos/100?1">
+<img src="https://picsum.photos/100?2">
+<img src="https://picsum.photos/100?3">
+<img src="https://picsum.photos/100?4">
+<img src="https://picsum.photos/100?5">
+<img src="https://picsum.photos/100?6">
+<img src="https://picsum.photos/100?7">
+<img src="https://picsum.photos/100?8">
+<img src="https://picsum.photos/100?9">
+<img src="https://picsum.photos/100?10">
+</div>
+
+</div>
+
+<script>
+/* THEME */
+function theme1(){
+document.body.style.background="linear-gradient(#ffdde1,#a1c4fd)";
+}
+function theme2(){
+document.body.style.background="linear-gradient(#c2e9fb,#a1c4fd)";
+}
+
+/* TIMER */
+let t=1500, i;
+function start(){
+clearInterval(i);
+i=setInterval(()=>{
+let m=Math.floor(t/60);
+let s=t%60;
+document.getElementById("timer").innerText=
+(m<10?"0":"")+m+":"+(s<10?"0":"")+s;
+t--;
+if(t<0)clearInterval(i);
+},1000);
+}
+function reset(){
+t=1500;
+document.getElementById("timer").innerText="25:00";
+}
+
+/* PROGRESS */
+let p=0;
+function progressAdd(){
+if(p<100){
+p+=10;
+document.getElementById("bar").style.width=p+"%";
+}
+}
+
+/* ALARM */
+function setAlarm(){
+let alarm=document.getElementById("alarmTime").value;
+setInterval(()=>{
+let now=new Date();
+let time=now.getHours()+":"+now.getMinutes();
+if(time===alarm){
+alert("⏰ Time to Study!");
+}
+},1000);
+}
+</script>
+
+</body>
+</html>
